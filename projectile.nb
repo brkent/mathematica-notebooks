@@ -1,0 +1,404 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     15194,        395]
+NotebookOptionsPosition[     14846,        378]
+NotebookOutlinePosition[     15183,        393]
+CellTagsIndexPosition[     15140,        390]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"eqnx", "=", " ", 
+     RowBox[{
+      RowBox[{"m", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", "t"}], "]"}], ",", "t"}], 
+        "]"}]}], "\[Equal]", "0"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"eqny", "=", 
+     RowBox[{
+      RowBox[{"m", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"y", "[", "t", "]"}], ",", "t"}], "]"}], ",", "t"}], 
+        "]"}]}], "\[Equal]", 
+      RowBox[{"m", " ", "g"}]}]}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"eqnydrag", "=", 
+     RowBox[{
+      RowBox[{"m", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"y", "[", "t", "]"}], ",", "t"}], "]"}], ",", "t"}], 
+        "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"m", " ", "g"}], "-", 
+       RowBox[{"k", " ", "m", " ", 
+        RowBox[{
+         RowBox[{"y", "'"}], "[", "t", "]"}]}]}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"eqnxdrag", "=", " ", 
+     RowBox[{
+      RowBox[{"m", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"D", "[", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", "t"}], "]"}], ",", "t"}], 
+        "]"}]}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"-", "k"}], " ", "m", " ", 
+       RowBox[{
+        RowBox[{"x", "'"}], "[", "t", "]"}]}]}]}], ";", "\[IndentingNewLine]",
+     "\[IndentingNewLine]", 
+    RowBox[{"solx", "=", 
+     RowBox[{"DSolve", "[", 
+      RowBox[{"eqnx", ",", "x", ",", "t"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"soly", "=", 
+     RowBox[{"DSolve", "[", 
+      RowBox[{"eqny", ",", "y", ",", "t"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"solxdrag", "=", 
+     RowBox[{"DSolve", "[", 
+      RowBox[{"eqnxdrag", ",", "x", ",", "t"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"solydrag", "=", 
+     RowBox[{"DSolve", "[", 
+      RowBox[{"eqnydrag", ",", "y", ",", "t"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"pldrag", "=", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"x", "[", "t", "]"}], "/.", 
+            RowBox[{"solxdrag", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"C", "[", "1", "]"}], "\[Rule]", 
+              RowBox[{"v", " ", 
+               RowBox[{"Cos", "[", 
+                RowBox[{"angle", "*", 
+                 RowBox[{"Pi", "/", "180.0"}]}], "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"C", "[", "2", "]"}], "\[Rule]", 
+              RowBox[{"v", " ", 
+               RowBox[{
+                RowBox[{"Cos", "[", 
+                 RowBox[{"angle", "*", 
+                  RowBox[{"Pi", "/", "180.0"}]}], "]"}], "/", "kval"}]}]}], 
+             ",", 
+             RowBox[{"k", "\[Rule]", "kval"}]}], "}"}]}], "]"}], ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"y", "[", "t", "]"}], "/.", 
+            RowBox[{"solydrag", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"C", "[", "1", "]"}], "\[Rule]", 
+              RowBox[{
+               RowBox[{"v", " ", 
+                RowBox[{"Sin", "[", 
+                 RowBox[{"angle", "*", 
+                  RowBox[{"Pi", "/", "180.0"}]}], "]"}]}], "-", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"-", "9.8"}], "/", "kval"}], ")"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"C", "[", "2", "]"}], "\[Rule]", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"v", " ", 
+                  RowBox[{"Sin", "[", 
+                   RowBox[{"angle", "*", 
+                    RowBox[{"Pi", "/", "180.0"}]}], "]"}]}], "-", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"-", "9.8"}], "/", "kval"}], ")"}]}], ")"}], "/", 
+               "kval"}]}], ",", 
+             RowBox[{"g", "\[Rule]", 
+              RowBox[{"-", "9.8"}]}], ",", 
+             RowBox[{"k", "\[Rule]", "kval"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "T"}], "}"}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "35000"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "15000"}], "}"}]}], "}"}]}], ",", " ", 
+       RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<x[t] meters\>\"", ",", "\"\<y[t] meters\>\""}], 
+         "}"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"pl", "=", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"x", "[", "t", "]"}], "/.", 
+            RowBox[{"solx", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"C", "[", "1", "]"}], "\[Rule]", "0"}], ",", 
+             RowBox[{
+              RowBox[{"C", "[", "2", "]"}], "\[Rule]", 
+              RowBox[{"v", " ", 
+               RowBox[{"Cos", "[", 
+                RowBox[{"angle", "*", 
+                 RowBox[{"Pi", "/", "180.0"}]}], "]"}]}]}]}], "}"}]}], "]"}], 
+         ",", 
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"y", "[", "t", "]"}], "/.", 
+            RowBox[{"soly", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"C", "[", "1", "]"}], "\[Rule]", "0"}], ",", 
+             RowBox[{
+              RowBox[{"C", "[", "2", "]"}], "\[Rule]", 
+              RowBox[{"v", " ", 
+               RowBox[{"Sin", "[", 
+                RowBox[{"angle", "*", 
+                 RowBox[{"Pi", "/", "180.0"}]}], "]"}]}]}], ",", 
+             RowBox[{"g", "\[Rule]", 
+              RowBox[{"-", "9.8"}]}]}], "}"}]}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "T"}], "}"}], ",", " ", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "35000"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "15000"}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<x[t] meters\>\"", ",", "\"\<y[t] meters\>\""}], "}"}]}],
+        ",", " ", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Red", ",", "Thick"}], "}"}]}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Show", "[", 
+     RowBox[{"pl", ",", "pldrag", ",", " ", 
+      RowBox[{"ImageSize", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"600", ",", "300"}], "}"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"T", ",", "110", ",", "\"\<Time [sec]\>\""}], "}"}], ",", 
+     "0.0001", ",", "120"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"v", ",", "600", ",", "\"\<Velocity [m/s]\>\""}], "}"}], ",", 
+     "10", ",", "600"}], "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"angle", ",", "60", ",", "\"\<Angle [deg]\>\""}], "}"}], ",", 
+     "10", ",", "80"}], "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"kval", ",", "0.01", ",", "\"\<Air Resistance [1/sec]\>\""}], 
+      "}"}], ",", "0.001", ",", "0.09"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.523376318328589*^9, 3.5233763848023453`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`angle$$ = 60, $CellContext`kval$$ = 
+    0.01, $CellContext`T$$ = 110, $CellContext`v$$ = 600, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 110, "Time [sec]"}, 0.0001, 120}, {{
+       Hold[$CellContext`v$$], 600, "Velocity [m/s]"}, 10, 600}, {{
+       Hold[$CellContext`angle$$], 60, "Angle [deg]"}, 10, 80}, {{
+       Hold[$CellContext`kval$$], 0.01, "Air Resistance [1/sec]"}, 0.001, 
+      0.09}}, Typeset`size$$ = {600., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`T$34601$$ = 0, $CellContext`v$34602$$ = 
+    0, $CellContext`angle$34603$$ = 0, $CellContext`kval$34604$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`angle$$ = 60, $CellContext`kval$$ = 
+        0.01, $CellContext`T$$ = 110, $CellContext`v$$ = 600}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`T$$, $CellContext`T$34601$$, 0], 
+        Hold[$CellContext`v$$, $CellContext`v$34602$$, 0], 
+        Hold[$CellContext`angle$$, $CellContext`angle$34603$$, 0], 
+        Hold[$CellContext`kval$$, $CellContext`kval$34604$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`eqnx = $CellContext`m D[
+            D[
+             $CellContext`x[$CellContext`t], $CellContext`t], $CellContext`t] == 
+         0; $CellContext`eqny = $CellContext`m D[
+            D[
+             $CellContext`y[$CellContext`t], $CellContext`t], $CellContext`t] == \
+$CellContext`m $CellContext`g; $CellContext`eqnydrag = $CellContext`m D[
+            D[
+             $CellContext`y[$CellContext`t], $CellContext`t], $CellContext`t] == \
+$CellContext`m $CellContext`g - $CellContext`k $CellContext`m 
+          Derivative[
+           1][$CellContext`y][$CellContext`t]; $CellContext`eqnxdrag = \
+$CellContext`m D[
+            D[
+             $CellContext`x[$CellContext`t], $CellContext`t], $CellContext`t] == \
+(-$CellContext`k) $CellContext`m 
+          Derivative[1][$CellContext`x][$CellContext`t]; $CellContext`solx = 
+        DSolve[$CellContext`eqnx, $CellContext`x, $CellContext`t]; \
+$CellContext`soly = 
+        DSolve[$CellContext`eqny, $CellContext`y, $CellContext`t]; \
+$CellContext`solxdrag = 
+        DSolve[$CellContext`eqnxdrag, $CellContext`x, $CellContext`t]; \
+$CellContext`solydrag = 
+        DSolve[$CellContext`eqnydrag, $CellContext`y, $CellContext`t]; \
+$CellContext`pldrag = ParametricPlot[{
+           Evaluate[
+            ReplaceAll[
+             ReplaceAll[
+              $CellContext`x[$CellContext`t], 
+              Part[$CellContext`solxdrag, 1]], {
+             C[1] -> $CellContext`v$$ Cos[$CellContext`angle$$ (Pi/180.)], 
+              C[2] -> $CellContext`v$$ (
+                Cos[$CellContext`angle$$ (Pi/
+                   180.)]/$CellContext`kval$$), $CellContext`k -> \
+$CellContext`kval$$}]], 
+           Evaluate[
+            ReplaceAll[
+             ReplaceAll[
+              $CellContext`y[$CellContext`t], 
+              Part[$CellContext`solydrag, 1]], {
+             C[1] -> $CellContext`v$$ 
+                Sin[$CellContext`angle$$ (Pi/
+                   180.)] - (-9.8)/$CellContext`kval$$, 
+              C[2] -> ($CellContext`v$$ 
+                 Sin[$CellContext`angle$$ (Pi/
+                    180.)] - (-9.8)/$CellContext`kval$$)/$CellContext`kval$$, \
+$CellContext`g -> -9.8, $CellContext`k -> $CellContext`kval$$}]]}, \
+{$CellContext`t, 0, $CellContext`T$$}, PlotRange -> {{0, 35000}, {0, 15000}}, 
+          Frame -> True, 
+          FrameLabel -> {"x[t] meters", "y[t] meters"}]; $CellContext`pl = 
+        ParametricPlot[{
+           Evaluate[
+            ReplaceAll[
+             ReplaceAll[
+              $CellContext`x[$CellContext`t], 
+              Part[$CellContext`solx, 1]], {
+             C[1] -> 0, 
+              C[2] -> $CellContext`v$$ Cos[$CellContext`angle$$ (Pi/180.)]}]], 
+           Evaluate[
+            ReplaceAll[
+             ReplaceAll[
+              $CellContext`y[$CellContext`t], 
+              Part[$CellContext`soly, 1]], {
+             C[1] -> 0, 
+              C[2] -> $CellContext`v$$ 
+               Sin[$CellContext`angle$$ (Pi/
+                  180.)], $CellContext`g -> -9.8}]]}, {$CellContext`t, 
+           0, $CellContext`T$$}, PlotRange -> {{0, 35000}, {0, 15000}}, Frame -> 
+          True, FrameLabel -> {"x[t] meters", "y[t] meters"}, 
+          PlotStyle -> {Red, Thick}]; 
+       Show[$CellContext`pl, $CellContext`pldrag, ImageSize -> {600, 300}]), 
+      "Specifications" :> {{{$CellContext`T$$, 110, "Time [sec]"}, 0.0001, 
+         120}, {{$CellContext`v$$, 600, "Velocity [m/s]"}, 10, 
+         600}, {{$CellContext`angle$$, 60, "Angle [deg]"}, 10, 
+         80}, {{$CellContext`kval$$, 0.01, "Air Resistance [1/sec]"}, 0.001, 
+         0.09}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{645., {230., 235.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.523376276436154*^9, {3.52337632605205*^9, 3.523376351190571*^9}, 
+   3.523376385354725*^9}]
+}, Open  ]]
+},
+WindowSize->{868, 856},
+WindowMargins->{{167, Automatic}, {Automatic, 53}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 73, 1, 30, "Input"],
+Cell[CellGroupData[{
+Cell[655, 25, 8388, 230, 601, "Input"],
+Cell[9046, 257, 5784, 118, 482, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
